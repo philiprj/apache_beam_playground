@@ -14,9 +14,9 @@ build-backend = "poetry.core.masonry.api"
 
 [tool.poetry.dependencies]
 python = ">=3.11,<3.12"
-apache-beam = "*"
+apache-beam = { extras = ["test", "aws", "gcp"], version = "*" }
 pandas = ">=2.0, <3.0"
-numpy = ">=2.0, <3.0"
+numpy = ">=1.0, <2.0"
 
 [tool.poetry.group.dev.dependencies]
 pytest = "*"                   # Testing

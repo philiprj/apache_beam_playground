@@ -33,3 +33,23 @@ Beam currently supports the following runners:
 - Google Cloud Dataflow
 - Hazelcast Jet
 - Twister2
+
+## Wordcount Example
+
+The following example is taken from the [Beam Quickstart](https://beam.apache.org/get-started/quickstart-py/).
+
+You will need to download the input data from the [Beam Quickstart](https://beam.apache.org/get-started/quickstart-py/) page and place it in the `tmp` directory.
+
+```bash
+poetry run python src/wordcount_minimal.py --input=tmp/kinglear.txt --output=tmp/outputfile.txt  --runner=DirectRunner
+```
+
+For the streaming wordcount example, you will need to create a PubSub topic and subscription and set the `GOOGLE_APPLICATION_CREDENTIALS` environment variable to the path of the service account key file.
+
+```bash
+poetry run python src/streaming_wordcount.py \
+  --input_topic "projects/YOUR_PUBSUB_PROJECT_NAME/topics/YOUR_INPUT_TOPIC" \
+  --output_topic "projects/YOUR_PUBSUB_PROJECT_NAME/topics/YOUR_OUTPUT_TOPIC" \
+  --streaming
+  --streaming
+```
