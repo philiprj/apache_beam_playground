@@ -34,6 +34,44 @@ Beam currently supports the following runners:
 - Hazelcast Jet
 - Twister2
 
+## Motivation
+
+Problem with current parallel computing frameworks is that they exptect input data to become complete at some point in time. This is not the case for streaming data. Beam has a *unified model* for defining both batch (bounded data) and streaming (unbounded data) data-parallel processing pipelines. And it has a different execution engines so it can run on different backends.
+
+## Beam Concepts
+
+### Windowing:
+
+Enable processing of unbounded data by dividing it into finite chunks (windows) that can be processed independently.
+
+- Fixed windows: Set fixed window size, data is grouped into fixed-size windows based on event timestamp.
+- Sliding windows: Set window size and slide period, data from one window may overlap with data from the next window.
+- Session windows: Set session timeout, data is grouped into windows based on session timeout. For example, if a user is inactive for more than 10 minutes, the session window expires and the data is processed.
+- Global windows: All data is assigned to a single window. Used for batch jobs.
+
+### Event Time vs Processing Time:
+
+- Event time: Use the timestamp recorded when the event occurred. E.g. when a user clicks on a button.
+- Processing time: Use the timestamp when the event was processed. E.g. when the click is processed by the server.
+
+### Triggers:
+
+Define when to produce and output result from the window.
+
+### Core Transformations
+
+**ParDo**:
+
+- Perform a general-purpose transformation on each element.
+- Expects a `DoFn` as a parameter. A `DoFn` is user define logic that implements the transformation.
+- Element-wise transformation.
+- Can be applied to unbounded and bounded data.
+
+**GroupByKey**:
+
+- Group elements by key.
+- Collects elements for a given key into a window.
+
 ## Wordcount Example
 
 The following example is taken from the [Beam Quickstart](https://beam.apache.org/get-started/quickstart-py/).
