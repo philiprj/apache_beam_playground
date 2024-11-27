@@ -53,7 +53,7 @@ line-length = 88
 docstring-code-format = true
 quote-style = "double"
 
-[tool.ruff.isort]
+[tool.ruff.lint.isort]
 combine-as-imports = true
 lines-after-imports = 2
 
